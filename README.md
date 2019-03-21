@@ -51,6 +51,8 @@ Create a secret storage instance with an optional secret key and options where:
   * `opts.secretKeyEncoding` is the encoding of the secret key
   * `opts.valueEncoding` is an object containing `encode(value)` and
     `decode(buffer)` functions.
+  * `opts.storage` can be [Storage][Storage] interface or a function that
+    returns one.
   * `opts.seed` is an optionl seed value to generate the secret key that
     should be 32 bytes
 
