@@ -1,5 +1,5 @@
 {
-  "name": "secure-local-storage",
+  "name": "secret-local-storage",
   "version": "0.1.0",
   "description": "A wrapper around 'localStorage/sessionStorage' to provide storage encryption with libsodium",
   "main": "index.js",
@@ -10,6 +10,7 @@
   },
   "keywords": [
     "secure",
+    "secret",
     "local",
     "storage",
     "sodium",
@@ -31,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jwerle/secure-local-storage.git"
+    "url": "git+https://github.com/jwerle/secret-local-storage.git"
   },
   "bugs": {
-    "url": "https://github.com/jwerle/secure-local-storage/issues"
+    "url": "https://github.com/jwerle/secret-local-storage/issues"
   },
-  "homepage": "https://github.com/jwerle/secure-local-storage#readme"
+  "homepage": "https://github.com/jwerle/secret-local-storage#readme"
 }

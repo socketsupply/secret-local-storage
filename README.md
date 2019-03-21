@@ -1,4 +1,4 @@
-secure-local-storage
+secret-local-storage
 ====================
 
 A wrapper around 'localStorage/sessionStorage' to provide storage encryption with libsodium
@@ -6,41 +6,41 @@ A wrapper around 'localStorage/sessionStorage' to provide storage encryption wit
 ## Installation
 
 ```sh
-$ npm install secure-local-storage
+$ npm install secret-local-storage
 ```
 
 ## Usage
 
 ```js
-const { keygen } = require('secure-local-storage/keygen')
+const { keygen } = require('secret-local-storage/keygen')
 const secretKey = keygen()
-const secureStorage = require('secure-local-storage')(secretKey) // will generate key by default
+const secretStorage = require('secret-local-storage')(secretKey) // will generate key by default
 
-secureStorage.setItem('someKey', 'some secret value')
-console.log(secureStorage.getItem('someKey')) // some secret value
+secretStorage.setItem('someKey', 'some secret value')
+console.log(secretStorage.getItem('someKey')) // some secret value
 console.log(localStorage.getItem('someKey')) // 5J3nmcMCcABSwJN
 ```
 
 ## Example
 
 ```js
-const secureStorage = require('secure-local-storage')('3e852b5d881b22261b8e417e217a9fa9757f4532305c4e46e2a6966aa89840f6')
+const secretStorage = require('secret-local-storage')('3e852b5d881b22261b8e417e217a9fa9757f4532305c4e46e2a6966aa89840f6')
 
 localStorage.setItem('hello', 'world')
-console.log(secureStorage.getItem('hello')); // outputs 'hello'
+console.log(secretStorage.getItem('hello')); // outputs 'hello'
 
-secureStorage.setItem('hello', 'world')
+secretStorage.setItem('hello', 'world')
 console.log(localStorage.getItem('hello')); // should be encrypted
 ```
 
 ## API
 
-The `SecureLocalStorage` class implements the same API as the [Storage][Storage]
+The `SecretLocalStorage` class implements the same API as the [Storage][Storage]
 API.
 
-### `const secureStorage = require('secure-local-storage')(secretKey, opts)`
+### `const secretStorage = require('secret-local-storage')(secretKey, opts)`
 
-Create a secure storage instance with an optional secret key and options where:
+Create a secret storage instance with an optional secret key and options where:
 
 * `secretKey` is a 32-byte buffer or 64 character 'hex' encoded string. The
   encoding of the secret key can be specified with `opts.secretKeyEncoding`.
@@ -58,9 +58,9 @@ Create a secure storage instance with an optional secret key and options where:
 
 A 32 byte secret key used for encryption and child key derivation.
 
-#### `secureStorage.storage`
+#### `secretStorage.storage`
 
-The [Storage][Storage] interface backing the `SecureLocalStorage` instance.
+The [Storage][Storage] interface backing the `SecretLocalStorage` instance.
 
 #### `secretKey.valueEncoding`
 
@@ -74,24 +74,24 @@ Encodes `value` into a `Buffer`
 
 Decodes `buffer` into a value. Most likely, a string.
 
-#### `secureStorage.key(n)`
+#### `secretStorage.key(n)`
 
 The same API as [Storage.key()][Storage.key].
 
-#### `secureStorage.getItem(key)`
+#### `secretStorage.getItem(key)`
 
 The same API as [Storage.getItem()][Storage.getItem]. If decryption fails, this
 function will return the original value found in storage.
 
-#### `secureStorage.setItem(key)`
+#### `secretStorage.setItem(key)`
 
 The same API as [Storage.setItem()][Storage.setItem].
 
-#### `secureStorage.removeItem(key)`
+#### `secretStorage.removeItem(key)`
 
 The same API as [Storage.removeItem()][Storage.removeItem].
 
-#### `secureStorage.clear(key)`
+#### `secretStorage.clear(key)`
 
 The same API as [Storage.clear()][Storage.clear].
 

@@ -32,7 +32,7 @@ function update(source, storage) {
   }
 }
 
-class SecureLocalStorage {
+class SecretLocalStorage {
   static get defaults() {
     return {
       secretKeyEncoding: 'hex',
@@ -50,7 +50,7 @@ class SecureLocalStorage {
       opts = {}
     }
 
-    opts = Object.assign(SecureLocalStorage.defaults, opts)
+    opts = Object.assign(SecretLocalStorage.defaults, opts)
 
     if ('string' !== typeof secretKey && false === Buffer.isBuffer(secretKey)) {
       secretKey = keygen(opts.seed)
@@ -174,14 +174,14 @@ class SecureLocalStorage {
   }
 }
 
-function createSecureLocalStorage(secretKey, opts) {
-  const secureStorage = new SecureLocalStorage(secretKey, opts)
+function createSecretLocalStorage(secretKey, opts) {
+  const secretStorage = new SecretLocalStorage(secretKey, opts)
 
   if ('undefined' === typeof global.Proxy) {
-    return secureStorage
+    return secretStorage
   }
 
-  return new Proxy(secureStorage, {
+  return new Proxy(secretStorage, {
     getOwnPropertyDescriptor,
     getPrototypeOf,
     defineProperty,
@@ -194,16 +194,16 @@ function createSecureLocalStorage(secretKey, opts) {
     set,
   })
 
-  function get(secureStorage, key) {
-    return secureStorage[key] || secureStorage.storage[key]
+  function get(secretStorage, key) {
+    return secretStorage[key] || secretStorage.storage[key]
   }
 
-  function has(secureStorage, key) {
-    return key in secureStorage.storage
+  function has(secretStorage, key) {
+    return key in secretStorage.storage
   }
 
-  function set(secureStorage, key, value) {
-    secureStorage.setItem(key, value)
+  function set(secretStorage, key, value) {
+    secretStorage.setItem(key, value)
     return true
   }
 
@@ -211,8 +211,8 @@ function createSecureLocalStorage(secretKey, opts) {
     return true
   }
 
-  function getOwnPropertyDescriptor(secureStorage, key) {
-    const value = secureStorage.getItem(key)
+  function getOwnPropertyDescriptor(secretStorage, key) {
+    const value = secretStorage.getItem(key)
 
     if (!value) {
       return undefined
@@ -226,30 +226,30 @@ function createSecureLocalStorage(secretKey, opts) {
     }
   }
 
-  function getPrototypeOf(secureStorage, key) {
-    return SecureLocalStorage.prototype
+  function getPrototypeOf(secretStorage, key) {
+    return SecretLocalStorage.prototype
   }
 
-  function defineProperty(secureStorage, key, descriptor) {
+  function defineProperty(secretStorage, key, descriptor) {
     if ('value' in descriptor) {
-      secureStorage.setItem(key, descriptor.value)
+      secretStorage.setItem(key, descriptor.value)
     }
 
-    return secureStorage
+    return secretStorage
   }
 
-  function deleteProperty(secureStorage, key) {
-    secureStorage.removeItem(key)
+  function deleteProperty(secretStorage, key) {
+    secretStorage.removeItem(key)
     return true
   }
 
-  function enumerate(secureStorage) {
-    return Object.keys(secureStorage.storage)
+  function enumerate(secretStorage) {
+    return Object.keys(secretStorage.storage)
   }
 
-  function ownKeys(secureStorage) {
-    return enumerate(secureStorage)
+  function ownKeys(secretStorage) {
+    return enumerate(secretStorage)
   }
 }
 
-module.exports = Object.assign(createSecureLocalStorage, { SecureLocalStorage })
+module.exports = Object.assign(createSecretLocalStorage, { SecretLocalStorage })
