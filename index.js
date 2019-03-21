@@ -150,9 +150,13 @@ class SecureLocalStorage {
     value = String(value)
     const { valueEncoding, secretKey, storage } = this
     const storageKey = kdf(key, secretKey)
-    const buffer = messages.Node === valueEncoding
+
+    const buffer = Buffer.from(
+      messages.Node === valueEncoding
       ? valueEncoding.encode({ value })
-      : valueEncoding(value)
+      : valueEncoding.encode(value)
+    )
+
     const nonce = blake2b(shash(key, secretKey), 24)
     const boxed = box(storageKey, nonce, buffer)
     const compressed = compress(boxed)

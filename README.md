@@ -66,6 +66,10 @@ The [Storage][Storage] interface backing the `SecureLocalStorage` instance.
 
 The value encoding used for encoding and ecoding value written to storage.
 
+##### `secretKey.valueEncoding.encode(value)`
+
+Encodes a value
+
 #### `secureStorage.key(n)`
 
 The same API as [Storage.key()][Storage.key].
