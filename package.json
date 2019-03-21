@@ -1,6 +1,6 @@
 {
   "name": "secure-local-storage",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A wrapper around 'localStorage/sessionStorage' to provide storage encryption with libsodium",
   "main": "index.js",
   "scripts": {
