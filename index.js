@@ -3,7 +3,6 @@ const { compress } = require('./compress')
 const { inflate } = require('./inflate')
 const { blake2b } = require('./blake2b')
 const { keygen } = require('./keygen')
-const { shash } = require('./shash')
 const { unbox } = require('./unbox')
 const messages = require('./messages')
 const { box } = require('./box')
@@ -132,7 +131,7 @@ class SecretLocalStorage {
     try {
       const storageKey = kdf(key, secretKey)
       const inflated = inflate(original)
-      const nonce = blake2b(shash(key, secretKey), 24)
+      const nonce = blake2b(key, secretKey, 24)
       const unboxed = unbox(storageKey, nonce, inflated)
       const value = valueEncoding.decode(unboxed)
 
@@ -157,7 +156,7 @@ class SecretLocalStorage {
       : valueEncoding.encode(value)
     )
 
-    const nonce = blake2b(shash(key, secretKey), 24)
+    const nonce = blake2b(key, secretKey, 24)
     const boxed = box(storageKey, nonce, buffer)
     const compressed = compress(boxed)
 
