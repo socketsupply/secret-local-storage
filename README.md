@@ -56,7 +56,7 @@ Create a secure storage instance with an optional secret key and options where:
 
 #### `secretKey.secretKey`
 
-The secret key used for encryption and child key derivation.
+A 32 byte secret key used for encryption and child key derivation.
 
 #### `secureStorage.storage`
 
