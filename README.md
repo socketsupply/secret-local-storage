@@ -93,7 +93,7 @@ MIT
 
 
 [Storage]: https://developer.mozilla.org/en-US/docs/Web/API/Storage
-[Storage.key]: https://developer.mozilla.org/en-US/docs/Web/API/Storage
+[Storage.key]: https://developer.mozilla.org/en-US/docs/Web/API/Storage/key
 [Storage.clear]: https://developer.mozilla.org/en-US/docs/Web/API/Storage/clear
 [Storage.getItem]: https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
 [Storage.setItem]: https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem
