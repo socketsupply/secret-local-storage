@@ -68,7 +68,11 @@ The value encoding used for encoding and ecoding value written to storage.
 
 ##### `secretKey.valueEncoding.encode(value)`
 
-Encodes a value
+Encodes `value` into a `Buffer`
+
+##### `secretKey.valueEncoding.decode(buffer)`
+
+Decodes `buffer` into a value. Most likely, a string.
 
 #### `secureStorage.key(n)`
 

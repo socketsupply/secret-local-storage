@@ -139,7 +139,7 @@ class SecureLocalStorage {
       if (valueEncoding === messages.Node) {
         return value.value.toString()
       } else {
-        return value.toString()
+        return value
       }
     } catch (err) {
       return original
